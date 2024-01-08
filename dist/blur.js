@@ -23,7 +23,7 @@ for(element of blurs){
         element.style.height = element.getAttribute('blur-height');
     }
     if(element.getAttribute('blur-amount')){
-        element.style.filter = `blur(${element.getAttribute('blur-height')})`;
+        element.style.filter = `blur(${element.getAttribute('blur-amount')})`;
     }
     if(element.getAttribute('blur-color')){
         element.style.backgroundColor = element.getAttribute('blur-color');
