@@ -1,4 +1,4 @@
-# BlurJS
+# BlurJS 1.0
 
 [![GitHub license](https://img.shields.io/badge/license-custom-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
