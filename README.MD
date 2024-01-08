@@ -14,12 +14,12 @@ You can include BlurJS in your project by downloading it from this repository an
 
 **Minified Version**
 ```html
-<script src="https://cdn.jsdelivr.net/gh/infinitode/blurjs/dist/blur.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Infinitode/BlurJS@tree/main/dist/blur.min.js"></script>
 ```
 
 **Normal Version**
 ```html
-<script src="https://cdn.jsdelivr.net/gh/infinitode/blurjs/dist/blur.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Infinitode/BlurJS@tree/main/dist/blur.js"></script>
 ```
 
 ## How to use BlurJS
