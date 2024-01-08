@@ -4,7 +4,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/issues)
 
-BlurJS is a lightweight JavaScript library for creating blurred effects on HTML elements. Easily integrate blur into your web projects with simple HTML attributes.
+BlurJS is a lightweight JavaScript library for creating blurred effects on HTML elements. Easily integrate blurred elements into your web projects with simple HTML attributes.
 
 # Getting Started
 
@@ -21,6 +21,8 @@ You can include BlurJS in your project by downloading it from this repository an
 ```html
 <script src="https://cdn.jsdelivr.net/gh/Infinitode/BlurJS@main/dist/blur.js"></script>
 ```
+
+**Important Note:** BlurJS should be placed in the `body` element of your HTML file, after all the blur elements, not in the `head` element.
 
 ## How to use BlurJS
 
