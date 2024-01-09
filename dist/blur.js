@@ -29,7 +29,7 @@ for(element of blurs){
         element.style.backgroundColor = element.getAttribute('blur-color');
     }
     if(element.getAttribute('blur-z-index')){
-        element.style.zIndex = element.getAttribute('blur-x-index');
+        element.style.zIndex = element.getAttribute('blur-z-index');
     }
     if(element.getAttribute('blur-top')){
         element.style.top = element.getAttribute('blur-top');
