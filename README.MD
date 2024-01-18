@@ -1,4 +1,4 @@
-# BlurJS 1.0
+# BlurJS 1.1
 
 [![GitHub license](https://img.shields.io/badge/license-compliance-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
@@ -6,6 +6,10 @@
 [![JSDelivr monthly downloads](https://data.jsdelivr.com/v1/package/gh/Infinitode/BlurJS/badge?style=rounded)](https://www.jsdelivr.com/package/gh/Infinitode/BlurJS)
 
 BlurJS is a lightweight JavaScript library for creating blurred effects on HTML elements. Easily integrate blurred elements into your web projects with simple HTML attributes.
+
+## Changes in Version 1.1
+
+BlurJS now includes a `blur-background` property, allowing for more control over the blur, and some blur animations properties to animate the blurs. The code has also been refactored for better readability. Removed the `blur-color` property, as it is no longer needed, use `blur-background`, it works the same, but allows for more advanced blurs. You can also now use multiple animations on one blur element, this allows you to create more advanced blur animations.
 
 # Getting Started
 
@@ -38,15 +42,31 @@ There are several available properties that come with BlurJS, these include (inc
 - `blur-width`: Sets the width of the blur. `default 50px`
 - `blur-height`: Sets the height of the blur. `default 50px`
 - `blur-amount`: Sets the amount of blur. `default 25px`
-- `blur-color`: Sets the color of the blur (gradients can also be used). `default red`
+- `blur-background`: Sets the color or background of the blur (gradients can also be used). `default red`
 - `blur-z-index`: Sets the Z Index of the blur. `default 99`
-- `blur-top`: Positions the blur from the top. `default 0`
-- `blur-left`: Positions the blur from the left. `default 0`
+- `blur-top`: Positions the blur from the top. `no default assigned`
+- `blur-left`: Positions the blur from the left. `no default assigned`
 - `blur-right`: Positions the blur from the right. `no default assigned`
 - `blur-bottom`: Positions the blur from the bottom. `no default assigned`
 - `blur-border-radius`: Changes the blur border radius. `default 5rem 2rem 5rem 50%`
+- `blur-grain`: Must be set to `true` in order to work. Sets the blur to a grainy texture. `no default assigned`
+- `blur-scale`: The value to scale to. If present triggers a scale animation to that value. `no default assigned`
+- `blur-scale-duration`: Optional duration value for the scale animation. `no default assigned`
+- `blur-scale-repetitions`: Optional repetitions value for the scale animation. `no default assigned`
+- `blur-translate-x`: The value to translate on the x-axis. If present triggers a translation animation to that value. `no default assigned`
+- `blur-translate-x-duration`: Optional duration value for the translation animation. `no default assigned`
+- `blur-translate-x-repetitions`: Optional repetitions value for the translation animation. `no default assigned`
+- `blur-translate-y`: The value to translate on the y-axis. If present triggers a translation animation to that value. `no default assigned`
+- `blur-translate-y-duration`: Optional duration value for the translation animation. `no default assigned`
+- `blur-translate-y-repetitions`: Optional repetitions value for the translation animation. `no default assigned`
+- `blur-opacity`: The value to animate on the opacity property. If present triggers a opacity animation to that value. `no default assigned`
+- `blur-opacity-duration`: Optional duration value for the opacity animation. `no default assigned`
+- `blur-opacity-repetitions`: Optional repetitions value for the opacity animation. `no default assigned`
+- `blur-animate`: The value to transition to. Transitions from the `blur-amount` value and this value. If present triggers a blur animation to that value. `no default assigned`
+- `blur-animate-duration`: Optional duration value for the blur animation. `no default assigned`
+- `blur-animate-repetitions`: Optional repetitions value for the blur animation. `no default assigned`
 
-*more coming soon*
+*View the [docs](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation) for more...*
 
 ## Usage examples
 
@@ -57,9 +77,9 @@ Here follows a couple of basic usage examples for BlurJS.
 <div class="blur" blur-width="50px" blur-height="50px">
 ```
 
-### 2. Color
+### 2. Background / Color
 ```HTML
-<div class="blur" blur-color="#5d17eb">
+<div class="blur" blur-background="#5d17eb">
 ```
 
 ### 3. Border Radius
