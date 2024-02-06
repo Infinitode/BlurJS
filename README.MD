@@ -18,7 +18,7 @@ BlurJS now includes a `blur-background` property, allowing for more control over
 Changes coming to BlurJS in version 1.2:
 - Hover animations
 - Scroll Animations
-- Pointer events and user selection booeleans
+- Pointer events and user selection booleans
 - Browser vendor prefixes for compatibility across multiple browsers
 
 # Getting Started
