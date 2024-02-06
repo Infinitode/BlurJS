@@ -11,6 +11,16 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 
 BlurJS now includes a `blur-background` property, allowing for more control over the blur, and some blur animations properties to animate the blurs. The code has also been refactored for better readability. Removed the `blur-color` property, as it is no longer needed, use `blur-background`, it works the same, but allows for more advanced blurs. You can also now use multiple animations on one blur element, this allows you to create more advanced blur animations.
 
+**Note: You can disable pointer events for BlurJS using `.blur{pointer-events:none}`, in your CSS to avoid pointer events being fired on the blurs, if you place it over elements like buttons, etc. Similarly user selection can also be disabled using `.blur{user-select:none}`. Remember to also include browser prefixes when using these CSS rules.**
+
+## Coming soon in version 1.2
+
+Changes coming to BlurJS in version 1.2:
+- Hover animations
+- Scroll Animations
+- Pointer events and user selection booeleans
+- Browser vendor prefixes for compatibility across multiple browsers
+
 # Getting Started
 
 ## Installation
