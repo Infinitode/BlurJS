@@ -1,4 +1,4 @@
-# BlurJS 1.1
+# BlurJS 1.2
 
 [![GitHub license](https://img.shields.io/badge/license-compliance-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
@@ -7,19 +7,14 @@
 
 BlurJS is a lightweight JavaScript library for creating blurred effects on HTML elements. Easily integrate blurred elements into your web projects with simple HTML attributes.
 
-## Changes in Version 1.1
+## Changes in Version 1.2
 
-BlurJS now includes a `blur-background` property, allowing for more control over the blur, and some blur animations properties to animate the blurs. The code has also been refactored for better readability. Removed the `blur-color` property, as it is no longer needed, use `blur-background`, it works the same, but allows for more advanced blurs. You can also now use multiple animations on one blur element, this allows you to create more advanced blur animations.
+Pointer events and user selection is now available through BlurJS parameters. You can trigger animation effects dynamically using the new `blur-interaction` parameter. This will enable you to make custom interactions using very little effort.
 
-**Note: You can disable pointer events for BlurJS using `.blur{pointer-events:none}`, in your CSS to avoid pointer events being fired on the blurs, if you place it over elements like buttons, etc. Similarly user selection can also be disabled using `.blur{user-select:none}`. Remember to also include browser prefixes when using these CSS rules.**
-
-## Coming soon in version 1.2
-
-Changes coming to BlurJS in version 1.2:
-- Hover animations
-- Scroll Animations
-- Pointer events and user selection booleans
-- Browser vendor prefixes for compatibility across multiple browsers
+### Changelog:
+1. Moved the for loop to loop per element, improving stability and performance.
+2. Created implementations for interactions with blur elements using the `blur-interaction` attribute.
+3. Updated the code to also have attributes for controlling pointer events and user selection.
 
 # Getting Started
 
@@ -75,8 +70,9 @@ There are several available properties that come with BlurJS, these include (inc
 - `blur-animate`: The value to transition to. Transitions from the `blur-amount` value and this value. If present triggers a blur animation to that value. `no default assigned`
 - `blur-animate-duration`: Optional duration value for the blur animation. `no default assigned`
 - `blur-animate-repetitions`: Optional repetitions value for the blur animation. `no default assigned`
+- `blur-interaction`: Optional value for animation triggers, choose from `scroll` (triggers animation when in viewport), `click` (toggles animation state when clicked) or `hover` (toggles playing state based on hover events). `no default assigned`
 
-*View the [docs](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation) for more...*
+*View the [official documentation](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation) for more information...*
 
 ## Usage examples
 
@@ -97,7 +93,7 @@ Here follows a couple of basic usage examples for BlurJS.
 <div class="blur" blur-border-radius="50%">
 ```
 
-These examples only detail the basic usage of BlurJS, BlurJS is directly connected to CSS properties, which allows for more advanced effects such as gradient blurs, animated blurs, shape blurs, etc.
+These examples only detail the basic usage of BlurJS, BlurJS is directly connected to CSS properties, which allows for more advanced effects such as gradient blurs, animated blurs, shape blurs, etc. You can also now create animated effects, and interactions, using just the simple BlurJS attributes.
 
 # License
 
