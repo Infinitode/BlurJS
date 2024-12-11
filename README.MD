@@ -7,11 +7,14 @@
 
 BlurJS is a lightweight JavaScript library for creating blurred effects on HTML elements. Easily integrate blurred elements into your web projects with simple HTML attributes.
 
+> [!NOTE]
+> Older versions of BlurJS are not maintained, and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
+
 ## Changes in Version 1.2
 
 Pointer events and user selection is now available through BlurJS parameters. You can trigger animation effects dynamically using the new `blur-interaction` parameter. This will enable you to make custom interactions using very little effort.
 
-### Changelog:
+### Changes in Version 1.1:
 1. Moved the for loop to loop per element, improving stability and performance.
 2. Created implementations for interactions with blur elements using the `blur-interaction` attribute.
 3. Updated the code to also have attributes for controlling pointer events and user selection.
@@ -32,13 +35,15 @@ You can include BlurJS in your project by downloading it from this repository an
 <script src="https://cdn.jsdelivr.net/gh/Infinitode/BlurJS@main/dist/blur.js"></script>
 ```
 
-**Important Note:** BlurJS should be placed in the `body` element of your HTML file, after all the blur elements, not in the `head` element.
+> [!IMPORTANT]
+> BlurJS should be placed in the `body` element of your HTML file, after all the blur elements, not in the `head` element.
 
 ## How to use BlurJS
 
 You can use BlurJS in an HTML file. It will automatically detect all elements with a class of `blur`.
 
-*Please note that the parent element in which the blur is placed must have it's position set to `relative`.*
+> [!NOTE]
+> The parent element in which the blur is placed must have it's position set to `relative`.
 
 ## Available properties
 
@@ -72,13 +77,14 @@ There are several available properties that come with BlurJS, these include (inc
 - `blur-animate-repetitions`: Optional repetitions value for the blur animation. `no default assigned`
 - `blur-interaction`: Optional value for animation triggers, choose from `scroll` (triggers animation when in viewport), `click` (toggles animation state when clicked) or `hover` (toggles playing state based on hover events). `no default assigned`
 
-*View the [official documentation](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation) for more information...*
+> [!NOTE]
+> View the [official documentation](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation) for more information...
 
 ## Usage examples
 
 Here follows a couple of basic usage examples for BlurJS.
 
-### 1. Width and Height
+### 1. Controlling Width and Height
 ```HTML
 <div class="blur" blur-width="50px" blur-height="50px">
 ```
@@ -93,7 +99,7 @@ Here follows a couple of basic usage examples for BlurJS.
 <div class="blur" blur-border-radius="50%">
 ```
 
-These examples only detail the basic usage of BlurJS, BlurJS is directly connected to CSS properties, which allows for more advanced effects such as gradient blurs, animated blurs, shape blurs, etc. You can also now create animated effects, and interactions, using just the simple BlurJS attributes.
+These examples only detail the basic usage of BlurJS, BlurJS is directly connected to CSS properties, which allows for more advanced effects such as gradient blurs, animated blurs, shape blurs, etc. You can also create animated effects and interactions using BlurJS's attributes.
 
 # License
 
