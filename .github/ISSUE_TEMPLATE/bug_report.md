@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: 'Issue: [BUG]'
+title: '[Brief descriptive title of the issue]'
 labels: bug
 assignees: ''
 
@@ -17,6 +17,9 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
+> [!NOTE]
+> If you cannot reproduce the issue consistently, please describe the circumstances under which it occurred.
+
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
@@ -24,9 +27,10 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
- - OS: [e.g. iOS]
+ - OS: [e.g. Windows]
  - Browser [e.g. chrome, safari]
  - Version [e.g. 22]
+ - Environment (if applicable): [e.g. NodeJS Server, Local, Static]
 
 **Smartphone (please complete the following information):**
  - Device: [e.g. iPhone6]
