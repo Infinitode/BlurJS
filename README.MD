@@ -1,4 +1,4 @@
-# BlurJS 1.2
+# BlurJS 1.3
 
 [![GitHub license](https://img.shields.io/badge/license-compliance-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
@@ -9,6 +9,10 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 
 > [!NOTE]
 > Older versions of BlurJS are not maintained, and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
+
+## Changes in Version 1.3
+
+BlurJS now supports using multiple animations in one single element. You can combine animations and change their easing, duration, and repetitions to create unique and fun interactions/animations. New `blur-{animation-type}-timing` parameter for controlling easing during animations.
 
 ## Changes in Version 1.2
 
@@ -63,18 +67,23 @@ There are several available properties that come with BlurJS, these include (inc
 - `blur-scale`: The value to scale to. If present triggers a scale animation to that value. `no default assigned`
 - `blur-scale-duration`: Optional duration value for the scale animation. `no default assigned`
 - `blur-scale-repetitions`: Optional repetitions value for the scale animation. `no default assigned`
+- `blur-scale-timing`: Optional timing value for the scale animation. `default linear`
 - `blur-translate-x`: The value to translate on the x-axis. If present triggers a translation animation to that value. `no default assigned`
 - `blur-translate-x-duration`: Optional duration value for the translation animation. `no default assigned`
 - `blur-translate-x-repetitions`: Optional repetitions value for the translation animation. `no default assigned`
+- `blur-translate-x-timing`: Optional timing value for the translation animation. `default linear`
 - `blur-translate-y`: The value to translate on the y-axis. If present triggers a translation animation to that value. `no default assigned`
 - `blur-translate-y-duration`: Optional duration value for the translation animation. `no default assigned`
 - `blur-translate-y-repetitions`: Optional repetitions value for the translation animation. `no default assigned`
+- `blur-translate-y-timing`: Optional timing value for the translation animation. `default linear`
 - `blur-opacity`: The value to animate on the opacity property. If present triggers a opacity animation to that value. `no default assigned`
 - `blur-opacity-duration`: Optional duration value for the opacity animation. `no default assigned`
 - `blur-opacity-repetitions`: Optional repetitions value for the opacity animation. `no default assigned`
+- `blur-opacity-timing`: Optional timing value for the opacity animation. `default linear`
 - `blur-animate`: The value to transition to. Transitions from the `blur-amount` value and this value. If present triggers a blur animation to that value. `no default assigned`
 - `blur-animate-duration`: Optional duration value for the blur animation. `no default assigned`
 - `blur-animate-repetitions`: Optional repetitions value for the blur animation. `no default assigned`
+- `blur-animate-timing`: Optional timing value for the blur animation. `default linear`
 - `blur-interaction`: Optional value for animation triggers, choose from `scroll` (triggers animation when in viewport), `click` (toggles animation state when clicked) or `hover` (toggles playing state based on hover events). `no default assigned`
 
 > [!NOTE]
