@@ -1,4 +1,4 @@
-# BlurJS 1.3
+# BlurJS 1.4
 
 [![GitHub license](https://img.shields.io/badge/license-compliance-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
@@ -9,6 +9,12 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 
 > [!NOTE]
 > Older versions of BlurJS are not maintained, and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
+
+## Changes in Version 1.4
+
+- Support for more browsers, using vendor prefixes where needed.
+- Performance optimizations by refactoring and cleaning code.
+- More usage examples in the README file for clearer usage.
 
 ## Changes in Version 1.3
 
