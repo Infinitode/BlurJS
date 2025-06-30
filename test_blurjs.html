@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlurJS Test Page</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .container {
+            position: relative;
+            border: 1px solid #eee;
+            margin-bottom: 20px;
+            padding: 10px;
+            min-height: 100px; /* Ensure container has some height */
+        }
+        .container h3 { margin-top: 0; }
+        .scroll-container { height: 300px; overflow-y: scroll; border: 1px dashed #ccc; padding: 10px; margin-bottom: 20px;}
+        .spacer { height: 150vh; background: #f0f0f0; text-align: center; padding-top: 20px; margin-bottom: 20px;}
+        .content-behind { padding: 5px; text-align: center; color: #555; }
+        .interactive-text { display: flex; align-items: center; justify-content: center; text-align:center; height: 100%; cursor: default; }
+        .click-area { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>BlurJS Test Page</h1>
+    <p>This page tests the various features of BlurJS using examples from the README.</p>
+
+    <h2>Basic Styling</h2>
+
+    <h3>1. Default Blur</h3>
+    <div class="container" style="width: 100px; height: 100px;">
+        <div class="blur"></div>
+    </div>
+
+    <h3>2. Custom Width, Height, Color, and Amount</h3>
+    <div class="container" style="width: 150px; height: 100px;">
+      <div class="blur"
+           blur-width="100px"
+           blur-height="70px"
+           blur-background="rgba(0, 150, 255, 0.7)"
+           blur-amount="15px">
+      </div>
+    </div>
+
+    <h3>3. Custom Border Radius & Positioning</h3>
+    <div class="container" style="width: 150px; height: 150px;">
+      <div class="blur"
+           blur-border-radius="50%"
+           blur-background="purple"
+           blur-width="80px"
+           blur-height="80px"
+           blur-top="20px"
+           blur-left="30px">
+      </div>
+    </div>
+
+    <h2>Advanced Styling</h2>
+
+    <h3>1. Combining Multiple Properties & Positioning</h3>
+    <div class="container" style="width: 250px; height: 150px; background: #f0f0f0;">
+      <p class="content-behind">Content behind the blur</p>
+      <div class="blur"
+           blur-width="200px"
+           blur-height="100px"
+           blur-background="rgba(255, 100, 100, 0.6)"
+           blur-amount="20px"
+           blur-border-radius="10px"
+           blur-top="25px"
+           blur-left="25px"
+           blur-z-index="100">
+      </div>
+    </div>
+
+    <h3>2. Grainy Texture Effect</h3>
+    <div class="container" style="width: 150px; height: 100px;">
+      <div class="blur"
+           blur-width="120px"
+           blur-height="80px"
+           blur-background="rgba(50, 200, 50, 0.7)"
+           blur-grain="true"
+           blur-amount="30px">
+      </div>
+    </div>
+
+    <h3>3. User Select and Pointer Events</h3>
+    <div class="container" style="width: 200px; height: 120px;">
+        <p class="content-behind" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">Try selecting this text (should NOT be possible). Click events should pass through the blur.</p>
+        <div class="blur"
+             blur-width="100%"
+             blur-height="100%"
+             blur-top="0"
+             blur-left="0"
+             blur-background="rgba(100,100,255,0.4)"
+             blur-pointer-events="false"
+             blur-user-select="false"
+             blur-amount="5px">
+        </div>
+    </div>
+     <div class="container" style="width: 200px; height: 120px;" onclick="alert('Clicked parent of blur with pointer-events: all')">
+        <p class="content-behind">This blur should allow clicks (pointer-events: all) and text selection.</p>
+        <div class="blur"
+             blur-width="100%"
+             blur-height="100%"
+             blur-top="0"
+             blur-left="0"
+             blur-background="rgba(100,255,100,0.4)"
+             blur-pointer-events="true"
+             blur-user-select="true"
+             blur-amount="2px">
+             Selectable Text on Blur
+        </div>
+    </div>
+
+
+    <h2>Animations</h2>
+
+    <h3>1. Simple Scale Animation</h3>
+    <div class="container" style="width: 100px; height: 100px;">
+      <div class="blur"
+           blur-scale="1.5"
+           blur-scale-duration="2s"
+           blur-scale-repetitions="infinite"
+           blur-background="orange">
+      </div>
+    </div>
+
+    <h3>2. Combined Opacity and Translation Animation</h3>
+    <div class="container" style="width: 200px; height: 100px; overflow: hidden;">
+      <div class="blur"
+           blur-opacity="0.2"
+           blur-opacity-duration="3s"
+           blur-opacity-repetitions="infinite"
+           blur-translate-x="70px"
+           blur-translate-x-duration="3s"
+           blur-translate-x-timing="ease-in-out"
+           blur-translate-x-repetitions="infinite"
+           blur-background="teal">
+      </div>
+    </div>
+
+    <h3>3. Animating Blur Amount</h3>
+    <div class="container" style="width: 100px; height: 100px;">
+      <div class="blur"
+           blur-amount="5px"
+           blur-animate="35px"
+           blur-animate-duration="2.5s"
+           blur-animate-repetitions="infinite"
+           blur-background="crimson">
+      </div>
+    </div>
+
+    <h2>Interactions</h2>
+
+    <h3>1. Hover Interaction (Scale Effect)</h3>
+    <div class="container click-area" style="width: 120px; height: 120px;">
+        <div class="interactive-text">Hover Me</div>
+        <div class="blur"
+             blur-interaction="hover"
+             blur-scale="2"
+             blur-scale-duration="0.5s"
+             blur-scale-timing="ease-out"
+             blur-scale-repetitions="1"
+             blur-background="rgba(255, 200, 0, 0.8)"
+             blur-width="80px"
+             blur-height="80px">
+        </div>
+    </div>
+
+    <h3>2. Click Interaction (Toggle Opacity)</h3>
+    <div class="container click-area" style="width: 120px; height: 120px;" >
+      <div class="interactive-text">Click Me</div>
+      <div class="blur"
+           blur-interaction="click"
+           blur-opacity="0.1"
+           blur-opacity-duration="1s"
+           blur-opacity-repetitions="1"
+           blur-background="rgba(0, 100, 200, 0.7)"
+           blur-width="100px"
+           blur-height="100px">
+      </div>
+    </div>
+
+    <h3>3. Scroll Interaction (Translate Effect)</h3>
+    <p>Scroll down slowly to see the effect on the element far below.</p>
+    <div class="spacer">Scroll further...</div>
+    <div class="container" style="width: 150px; height: 100px; margin: 10px auto; background: #f9f9f9;">
+      <div class="interactive-text">I appear on scroll</div>
+      <div class="blur"
+           blur-interaction="scroll"
+           blur-translate-y="-30px"
+           blur-translate-y-duration="1.5s"
+           blur-translate-y-repetitions="1"
+           blur-background="rgba(100, 0, 150, 0.75)"
+           blur-width="100%"
+           blur-height="100%"
+           blur-top="0"
+           blur-left="0">
+      </div>
+    </div>
+    <div class="spacer">More space after.</div>
+
+
+    <script src="dist/blur.js"></script>
+</body>
+</html>
