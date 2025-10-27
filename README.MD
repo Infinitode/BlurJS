@@ -1,4 +1,4 @@
-# BlurJS 1.4
+# BlurJS 1.5
 
 [![GitHub license](https://img.shields.io/badge/license-compliance-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
@@ -82,6 +82,7 @@ There are several available properties that come with BlurJS. Include these as H
 - `blur-grain`: Set to `true` to apply a grainy texture to the blur effect. `no default`
 - `blur-pointer-events`: Set to `true` to enable pointer events (e.g., clicks) on the blur element, or `false` to disable. `no default (inherits CSS default)`
 - `blur-user-select`: Set to `true` to allow text selection on the blur element, or `false` to disable. `no default (inherits CSS default)`
+- `blur-custom`: Apply any custom CSS properties to the blur element. This is useful for adding properties that are not available through the other attributes. `no default`
 
 **Animation Properties:**
 
@@ -260,6 +261,20 @@ Below are some examples to get you started. Remember to include the BlurJS scrip
        blur-height="100px">
   </div>
 </div>
+
+**3. Custom CSS properties**
+```html
+<div style="position: relative; width: 250px; height: 150px; border: 1px solid #eee; margin-bottom: 10px;">
+    <div class="blur"
+        blur-width="100%"
+        blur-height="100%"
+        blur-top="0"
+        blur-left="0"
+        blur-amount="5px"
+        blur-custom="background: linear-gradient(45deg, rgba(255,0,0,0.5), rgba(0,0,255,0.5)); border: 2px solid black; box-shadow: 5px 5px 10px rgba(0,0,0,0.5);">
+    </div>
+</div>
+```
 ```
 
 **3. Scroll Interaction (Translate Effect)**

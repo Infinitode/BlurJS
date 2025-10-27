@@ -9,6 +9,12 @@ if (!styleElement) {
     document.head.appendChild(styleElement);
 }
 
+// --- Version Information ---
+const blurVersion = document.body.getAttribute("blur-version");
+if (blurVersion) {
+    console.log(`BlurJS version ${blurVersion} is running.`);
+}
+
 // Iterate over each blur element and apply styles and animations
 blurElements.forEach(element => {
     // Generate a unique ID for each blur element to scope animations
@@ -48,6 +54,21 @@ blurElements.forEach(element => {
     // Special handling for blur-amount as it modifies the filter property
     if (element.hasAttribute("blur-amount")) {
         stylesToApply.filter = `blur(${element.getAttribute("blur-amount")})`;
+    }
+
+    // Handle custom CSS properties from blur-custom
+    if (element.hasAttribute("blur-custom")) {
+        const customStyles = element.getAttribute("blur-custom");
+        customStyles.split(';').forEach(style => {
+            if (style.trim()) {
+                const [property, value] = style.split(':');
+                if (property && value) {
+                    // Convert property to camelCase before adding it to the styles object
+                    const camelCaseProperty = property.trim().replace(/-(\w)/g, (_, letter) => letter.toUpperCase());
+                    stylesToApply[camelCaseProperty] = value.trim();
+                }
+            }
+        });
     }
 
     // Construct CSS text
