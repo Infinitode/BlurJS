@@ -10,6 +10,12 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 > [!NOTE]
 > Older versions of BlurJS are not maintained, and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
 
+## Changes in Version 1.5
+
+- Updated `test_blurjs.html` with a test case for the new attribute.
+- Added a `blur-version` attribute to the test page and a console log for the version.
+- Added a `blur-custom` attribute for custom CSS. This is useful for adding CSS that isn't supported by BlurJS out of the box.
+
 ## Changes in Version 1.4
 
 - Support for more browsers, using vendor prefixes where needed.
