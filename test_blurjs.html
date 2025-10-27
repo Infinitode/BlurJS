@@ -21,7 +21,7 @@
         .click-area { cursor: pointer; }
     </style>
 </head>
-<body>
+<body blur-version="1.5">
     <h1>BlurJS Test Page</h1>
     <p>This page tests the various features of BlurJS using examples from the README.</p>
 
@@ -182,6 +182,18 @@
 
     <h3>3. Scroll Interaction (Translate Effect)</h3>
     <p>Scroll down slowly to see the effect on the element far below.</p>
+     <div class="container" style="width: 250px; height: 150px;">
+        <h3>4. Custom CSS properties</h3>
+        <p>This blur element has a custom gradient background and a border applied using blur-custom.</p>
+        <div class="blur"
+             blur-width="100%"
+             blur-height="100%"
+             blur-top="0"
+             blur-left="0"
+             blur-amount="5px"
+             blur-custom="background: linear-gradient(45deg, rgba(255,0,0,0.5), rgba(0,0,255,0.5)); border: 2px solid black; box-shadow: 5px 5px 10px rgba(0,0,0,0.5);">
+        </div>
+    </div>
     <div class="spacer">Scroll further...</div>
     <div class="container" style="width: 150px; height: 100px; margin: 10px auto; background: #f9f9f9;">
       <div class="interactive-text">I appear on scroll</div>
