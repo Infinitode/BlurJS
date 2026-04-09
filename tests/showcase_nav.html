@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlurJS Nav & Scroll Showcase</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            z-index: 1000;
+        }
+        .nav-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-weight: bold; font-size: 1.5rem; }
+        .links { display: flex; gap: 20px; }
+        .links a { text-decoration: none; color: inherit; font-weight: 500; }
+
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .card {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .card-blur {
+            z-index: 0;
+        }
+        .card-content {
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="blur nav-bg"
+             blur-width="100%" blur-height="100%"
+             blur-background="rgba(255, 255, 255, 0.5)"
+             blur-amount="10px"
+             blur-custom="backdrop-filter: blur(10px);">
+        </div>
+        <div class="logo">BlurJS</div>
+        <div class="links">
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">Showcase</a>
+        </div>
+    </nav>
+
+    <section>
+        <h1>Scroll Down</h1>
+        <p>Notice the glassmorphism navbar above.</p>
+    </section>
+
+    <section>
+        <div class="card">
+            <div class="blur card-blur"
+                 blur-interaction="scroll"
+                 blur-width="150%" blur-height="150%"
+                 blur-background="linear-gradient(135deg, #60a5fa, #a855f7)"
+                 blur-amount="40px"
+                 blur-scale="1.5"
+                 blur-scale-duration="2s">
+            </div>
+            <div class="card-content">
+                <h2>Scroll Interaction</h2>
+                <p>This background pulses only when in view.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="card" style="cursor: pointer;">
+            <div class="blur card-blur"
+                 blur-interaction="hover"
+                 blur-width="100%" blur-height="100%"
+                 blur-background="rgba(236, 72, 153, 0.4)"
+                 blur-amount="20px"
+                 blur-scale="2"
+                 blur-scale-duration="0.5s">
+            </div>
+            <div class="card-content">
+                <h2>Hover Interaction</h2>
+                <p>Hover over this card to see the effect.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="../dist/blur.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlurJS Hero Showcase</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-content {
+            z-index: 10;
+            max-width: 800px;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+        }
+        /* Decorative blurred elements */
+        .light-blob {
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <!-- Background decorative blurs -->
+        <div class="blur light-blob"
+             blur-width="400px" blur-height="400px"
+             blur-background="rgba(59, 130, 246, 0.3)"
+             blur-amount="80px"
+             blur-top="-100px" blur-left="-100px"
+             blur-scale="1.2" blur-scale-duration="8s">
+        </div>
+
+        <div class="blur light-blob"
+             blur-width="300px" blur-height="300px"
+             blur-background="rgba(168, 85, 247, 0.3)"
+             blur-amount="60px"
+             blur-bottom="50px" blur-right="-50px"
+             blur-translate-x="-50px" blur-translate-y="-30px" blur-translate-x-duration="10s" blur-translate-y-duration="12s">
+        </div>
+
+        <div class="blur light-blob"
+             blur-width="200px" blur-height="200px"
+             blur-background="rgba(236, 72, 153, 0.2)"
+             blur-amount="100px"
+             blur-top="40%" blur-left="20%"
+             blur-animate="150px" blur-animate-duration="5s">
+        </div>
+
+        <div class="hero-content">
+            <h1>Experience the Blur</h1>
+            <p>BlurJS allows you to create stunning lighting effects and glassmorphism with minimal effort. This hero section uses animated blurred blobs to create depth and atmosphere.</p>
+        </div>
+    </div>
+
+    <script src="../dist/blur.js"></script>
+</body>
+</html>
