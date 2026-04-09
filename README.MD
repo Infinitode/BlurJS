@@ -4,11 +4,12 @@
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/issues)
 [![JSDelivr monthly downloads](https://data.jsdelivr.com/v1/package/gh/Infinitode/BlurJS/badge?style=rounded)](https://www.jsdelivr.com/package/gh/Infinitode/BlurJS)
+[Documentation](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation)
 
 BlurJS is a lightweight JavaScript library for creating blurred effects on HTML elements. Easily integrate blurred elements into your web projects with simple HTML attributes.
 
 > [!NOTE]
-> Older versions of BlurJS are not maintained, and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
+> Older versions of BlurJS are not maintained and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
 
 ## Changes in Version 1.6
 
@@ -31,11 +32,11 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 
 ## Changes in Version 1.3
 
-BlurJS now supports using multiple animations in one single element. You can combine animations and change their easing, duration, and repetitions to create unique and fun interactions/animations. New `blur-{animation-type}-timing` parameter for controlling easing during animations.
+BlurJS now supports using multiple animations in a single element. You can combine animations and change their easing, duration, and repetitions to create unique and fun interactions/animations. New `blur-{animation-type}-timing` parameter for controlling easing during animations.
 
 ## Changes in Version 1.2
 
-Pointer events and user selection is now available through BlurJS parameters. You can trigger animation effects dynamically using the new `blur-interaction` parameter. This will enable you to make custom interactions using very little effort.
+Pointer events and user selection are now available through BlurJS parameters. You can trigger animation effects dynamically using the new `blur-interaction` parameter. This will enable you to make custom interactions using very little effort.
 
 ### Changes in Version 1.1:
 1. Moved the for loop to loop per element, improving stability and performance.
@@ -79,7 +80,7 @@ You can include BlurJS in your project by downloading the ready-to-use files fro
 
 ## How to use BlurJS
 
-1.  Ensure the parent element of any `blur` element has its CSS `position` property set to `relative` (or `absolute`, `fixed`, `sticky`). This is crucial for correct positioning of the blur effect.
+1.  Ensure the parent element of any `blur` element has its CSS `position` property set to `relative` (or `absolute`, `fixed`, `sticky`). This is crucial for the correct positioning of the blur effect.
     ```html
     <div style="position: relative; width: 200px; height: 200px; border: 1px solid #ccc;">
       <!-- BlurJS elements will go here -->
