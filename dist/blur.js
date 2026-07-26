@@ -1,11 +1,6 @@
 (function() {
     const startTime = performance.now();
 
-    // Select all elements with the class "blur"
-    const blurElements = document.querySelectorAll(".blur");
-
-    if (blurElements.length === 0) return;
-
     // Get or create the style element for BlurJS keyframes
     let styleElement = document.getElementById("blur-styles");
     if (!styleElement) {
@@ -15,16 +10,27 @@
     }
 
     // --- Version Information ---
-    const blurVersion = document.body.getAttribute("blur-version");
-    if (blurVersion) {
-        console.log(`BlurJS version ${blurVersion} is running.`);
+    let versionLogged = false;
+    function logVersion() {
+        if (versionLogged) return;
+        if (document.body) {
+            const blurVersion = document.body.getAttribute("blur-version");
+            if (blurVersion) {
+                console.log(`BlurJS version ${blurVersion} is running.`);
+                versionLogged = true;
+            }
+        }
     }
 
     // Keyframe registry to avoid duplicate animations
     const keyframeRegistry = new Set();
+    const initializedElements = new WeakSet();
 
     // Iterate over each blur element and apply styles and animations
-    blurElements.forEach(element => {
+    function initializeElement(element) {
+        if (initializedElements.has(element)) return;
+        initializedElements.add(element);
+
         // --- Style Accumulation ---
         let stylesToApply = {
             position: "absolute",
@@ -46,7 +52,8 @@
             "blur-left": "left",
             "blur-right": "right",
             "blur-bottom": "bottom",
-            "blur-border-radius": "borderRadius"
+            "blur-border-radius": "borderRadius",
+            "blur-mix-blend-mode": "mixBlendMode"
         };
 
         for (const attr in styleAttributes) {
@@ -99,7 +106,7 @@
         }
 
         // --- Animations ---
-        const animationTypes = ["scale", "translate-x", "translate-y", "opacity", "animate"];
+        const animationTypes = ["scale", "rotate", "translate-x", "translate-y", "opacity", "animate"];
         let animationsToApply = [];
 
         animationTypes.forEach(type => {
@@ -109,19 +116,24 @@
                 const duration = element.getAttribute(`${baseAttribute}-duration`) || "1s";
                 const repetitions = element.getAttribute(`${baseAttribute}-repetitions`) || "infinite";
                 const timingFunction = element.getAttribute(`${baseAttribute}-timing`) || "linear";
+                const delay = element.getAttribute(`${baseAttribute}-delay`) || "0s";
 
                 // Animation name based on type and value for deduplication
                 const safeValue = value.replace(/[^a-z0-9]/gi, '-');
                 const animationName = `blur-${type}-${safeValue}`;
 
-                animationsToApply.push(`${animationName} ${duration} ${timingFunction} ${repetitions}`);
+                animationsToApply.push(`${animationName} ${duration} ${timingFunction} ${delay} ${repetitions}`);
 
                 if (!keyframeRegistry.has(animationName)) {
                     let keyframes = "";
                     switch (type) {
                         case "scale":
                             stylesToApply.transformOrigin = "center";
-                            keyframes = `@keyframes ${animationName} { 50% { transform: scale(${value}); } }`;
+                            keyframes = `@keyframes ${animationName} { 50% { scale: ${value}; } }`;
+                            break;
+                        case "rotate":
+                            stylesToApply.transformOrigin = "center";
+                            keyframes = `@keyframes ${animationName} { 50% { rotate: ${value}; } }`;
                             break;
                         case "translate-x":
                             keyframes = `@keyframes ${animationName} { 50% { transform: translateX(${value}); } }`;
@@ -188,8 +200,41 @@
             cssText += `${cssProp}: ${stylesToApply[style]}; `;
         }
         element.style.cssText = cssText;
+    }
+
+    function initAll() {
+        logVersion();
+        const initStartTime = performance.now();
+        const blurElements = document.querySelectorAll(".blur");
+        blurElements.forEach(element => initializeElement(element));
+        const initEndTime = performance.now();
+        if (blurElements.length > 0) {
+            console.log(`BlurJS: Processed ${blurElements.length} elements in ${(initEndTime - initStartTime).toFixed(2)}ms`);
+        }
+    }
+
+    // Set up MutationObserver to handle dynamically added elements
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.classList.contains("blur")) {
+                        initializeElement(node);
+                    }
+                    const nestedBlurs = node.querySelectorAll(".blur");
+                    nestedBlurs.forEach(nested => initializeElement(nested));
+                }
+            });
+        });
     });
 
-    const endTime = performance.now();
-    console.log(`BlurJS: Processed ${blurElements.length} elements in ${(endTime - startTime).toFixed(2)}ms`);
+    if (document.body) {
+        initAll();
+        observer.observe(document.body, { childList: true, subtree: true });
+    } else {
+        window.addEventListener("DOMContentLoaded", () => {
+            initAll();
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+    }
 })();
