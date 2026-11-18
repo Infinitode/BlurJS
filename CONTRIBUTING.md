@@ -8,7 +8,8 @@ Thank you for considering contributing to **BlurJS**! Contributions, whether the
    Create a fork of this repository to your GitHub account and clone it locally.
 
 2. **Run Tests**
-   Before making changes, run tests to confirm that everything works.
+
+   Open `tests/regression_test.html` in your browser. It tests both browser builds and displays the results without any tooling to install. Open `tests/basic_test.html` to try the examples manually.
 
 ## How to Contribute
 
@@ -18,14 +19,14 @@ Thank you for considering contributing to **BlurJS**! Contributions, whether the
    - Steps to reproduce (for bugs).
 
 2. **Make Changes**  
-   - Use clear and descriptive commit messages.
-   - (Optional) Write tests to show new functionality.
-   - Ensure the code is **readable**.
+   - Edit `dist/blur.js` and keep `dist/blur.min.js` in sync using a JavaScript minifier. Include both browser files in your changes.
+   - Add a case to `tests/regression_test.js` for bug fixes and new behavior.
+   - Use clear and descriptive commit messages, and keep the code readable.
 
 3. **Submit a Pull Request**  
    - Push your changes to a feature branch in your fork.
    - Submit a pull request with a detailed explanation of what you've changed or added.
-   - Ensure your PR passes all automated tests and adheres to the contribution guidelines.
+   - Run the browser regression suite and include the results in your pull request.
 
 ## Community Guidelines
 

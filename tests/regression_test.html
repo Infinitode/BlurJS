@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlurJS Browser Regression Tests</title>
+    <style>
+        body { font: 1rem/1.6 system-ui, sans-serif; margin: 2rem; }
+        li[data-result="fail"] { color: #b02020; }
+        li[data-result="skip"] { color: #555; }
+        iframe { position: fixed; inset: 0; width: 100%; height: 420px; opacity: 0; pointer-events: none; border: 0; }
+    </style>
+    <script defer src="regression_test.js"></script>
+</head>
+<body>
+    <h1>BlurJS Browser Regression Tests</h1>
+    <p>Tests run automatically on both browser builds. Reload to rerun them.</p>
+    <output id="summary" data-status="running" aria-live="polite">Running…</output>
+    <ol id="results"></ol>
+</body>
+</html>
