@@ -153,7 +153,7 @@
     <h2>Version 1.7 Additions</h2>
 
     <h3>1. Rotate and Delay Animation</h3>
-    <p>This element rotates 360deg after a 1s delay.</p>
+    <p>After a 1s delay, this element rotates to 360° and back.</p>
     <div class="container" style="width: 100px; height: 100px;">
       <div class="blur"
            blur-rotate="360deg"
@@ -178,6 +178,19 @@
     <p>A new .blur element will be appended below after 2 seconds.</p>
     <div id="dynamic-container" class="container" style="width: 150px; height: 100px;"></div>
 
+    <h2>Live Editing</h2>
+    <p>These controls change the existing element's attributes and class without recreating it.</p>
+    <p>
+        <label>Width <input id="preview-width" type="range" min="50" max="220" value="120"></label>
+        <label>Target opacity <input id="preview-opacity" type="range" min="0.1" max="1" step="0.05" value="0.35"></label>
+        <label><input id="preview-animation" type="checkbox" checked> Animate opacity</label>
+        <label><input id="preview-enabled" type="checkbox" checked> Enable blur</label>
+    </p>
+    <div class="container" style="width: 260px;">
+        <div id="live-preview" class="blur" aria-hidden="true" blur-pointer-events="false"
+             blur-width="120px" blur-height="80px" blur-amount="12px" blur-border-radius="40px"
+             blur-background="deepskyblue" blur-opacity="0.35" blur-opacity-duration="2s"></div>
+    </div>
 
     <h2>Interactions</h2>
 
@@ -189,7 +202,6 @@
              blur-scale="2"
              blur-scale-duration="0.5s"
              blur-scale-timing="ease-out"
-             blur-scale-repetitions="1"
              blur-background="rgba(255, 200, 0, 0.8)"
              blur-width="80px"
              blur-height="80px">
@@ -203,7 +215,6 @@
            blur-interaction="click"
            blur-opacity="0.1"
            blur-opacity-duration="1s"
-           blur-opacity-repetitions="1"
            blur-background="rgba(0, 100, 200, 0.7)"
            blur-width="100px"
            blur-height="100px">
@@ -244,6 +255,21 @@
 
     <script src="../dist/blur.js"></script>
     <script>
+        const preview = document.getElementById('live-preview');
+        const width = document.getElementById('preview-width');
+        const opacity = document.getElementById('preview-opacity');
+        const animation = document.getElementById('preview-animation');
+        const enabled = document.getElementById('preview-enabled');
+
+        width.addEventListener('input', () => preview.setAttribute('blur-width', `${width.value}px`));
+        enabled.addEventListener('change', () => preview.classList.toggle('blur', enabled.checked));
+        function updateAnimation() {
+            if (animation.checked) preview.setAttribute('blur-opacity', opacity.value);
+            else preview.removeAttribute('blur-opacity');
+        }
+        opacity.addEventListener('input', updateAnimation);
+        animation.addEventListener('change', updateAnimation);
+
         setTimeout(() => {
             const container = document.getElementById('dynamic-container');
             const blurDiv = document.createElement('div');

@@ -38,17 +38,13 @@
             font-size: 1.25rem;
             color: #94a3b8;
         }
-        /* Decorative blurred elements */
-        .light-blob {
-            border-radius: 50%;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
     <div class="hero">
         <!-- Background decorative blurs -->
-        <div class="blur light-blob"
+        <div class="blur" aria-hidden="true"
+             blur-z-index="0" blur-border-radius="50%" blur-pointer-events="false"
              blur-width="400px" blur-height="400px"
              blur-background="rgba(59, 130, 246, 0.3)"
              blur-amount="80px"
@@ -56,7 +52,8 @@
              blur-scale="1.2" blur-scale-duration="8s">
         </div>
 
-        <div class="blur light-blob"
+        <div class="blur" aria-hidden="true"
+             blur-z-index="0" blur-border-radius="50%" blur-pointer-events="false"
              blur-width="300px" blur-height="300px"
              blur-background="rgba(168, 85, 247, 0.3)"
              blur-amount="60px"
@@ -64,7 +61,8 @@
              blur-translate-x="-50px" blur-translate-y="-30px" blur-translate-x-duration="10s" blur-translate-y-duration="12s">
         </div>
 
-        <div class="blur light-blob"
+        <div class="blur" aria-hidden="true"
+             blur-z-index="0" blur-border-radius="50%" blur-pointer-events="false"
              blur-width="200px" blur-height="200px"
              blur-background="rgba(236, 72, 153, 0.2)"
              blur-amount="100px"

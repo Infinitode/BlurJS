@@ -12,9 +12,19 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 > [!NOTE]
 > Older versions of BlurJS are not maintained and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
 
+## Unreleased maintenance update
+
+- Preserves author inline styles, parses `blur-custom` as native CSS, and layers translucent grain over solid colors and gradients.
+- Combines X and Y translations in browsers with additive CSS animations. Distinct animation targets no longer share a keyframe accidentally, and malformed options fall back without disabling other animations.
+- Shares a viewport observer across scroll-triggered elements and releases detached targets. Loading the script twice no longer initializes elements twice.
+- Respects `prefers-reduced-motion` for built-in animations while keeping static blur styles.
+- Updates effects when their `blur-*` attributes or `.blur` class change, without needing to recreate the element.
+- Removes generated keyframes when their last BlurJS animation stops using them.
+- Adds a standalone browser regression suite for both distributions.
+
 ## Changes in Version 1.7
 
-- **Dynamic DOM Observation (SPA Support)**: Implemented automatic detection and initialization of newly injected `.blur` elements via a high-performance `MutationObserver`. Processed elements are tracked securely with a `WeakSet` to prevent memory leaks and redundant style initialization.
+- **Dynamic DOM Observation (SPA Support)**: Implemented automatic detection and initialization of newly injected `.blur` elements via a `MutationObserver`, with weak references to avoid redundant initialization.
 - **Independent Transform Properties**: Updated `blur-scale` and `blur-rotate` animations to use modern CSS independent transform properties (`scale` and `rotate`). This allows multiple animations to be combined on a single element without overriding one another!
 - **Rotation Animations**: Added native support for `blur-rotate` animations.
 - **Staggered Animation Delays**: Introduced delay parameters (`blur-{animation-type}-delay`) across all animation properties (e.g. `blur-rotate-delay`).
@@ -52,9 +62,9 @@ Pointer events and user selection are now available through BlurJS parameters. Y
 2. Created implementations for interactions with blur elements using the `blur-interaction` attribute.
 3. Updated the code to also have attributes for controlling pointer events and user selection.
 
-# Performance Benchmarks
+# Historical Performance Benchmarks
 
-BlurJS 1.6 and 1.7 introduce significant performance improvements, especially when handling many blurred elements.
+These results compare the original 1.5 and 1.6/1.7 builds. To measure initialization on your machine with the current build, open `tests/stress_test.html`.
 
 | Metric | Version 1.5 | Version 1.6 / 1.7 | Improvement |
 | :--- | :--- | :--- | :--- |
@@ -68,7 +78,7 @@ BlurJS 1.6 and 1.7 introduce significant performance improvements, especially wh
 
 ## Installation
 
-You can include BlurJS in your project by downloading the ready-to-use files from this repository or by using the CDN links for faster loading.
+BlurJS is distributed as ready-to-use browser scripts. Download one of the files below or use the CDN; no package installation or build step is required.
 - `dist/blur.js`: The development (unminified) version of BlurJS.
 - `dist/blur.min.js`: The production (minified) version of BlurJS.
 
@@ -84,8 +94,7 @@ You can include BlurJS in your project by downloading the ready-to-use files fro
 <script src="https://cdn.jsdelivr.net/gh/Infinitode/BlurJS@main/dist/blur.js"></script>
 ```
 
-> [!IMPORTANT]
-> BlurJS should be placed at the end of the `<body>` element in your HTML file, after all elements you intend to apply blur effects to. Do not place it in the `<head>` element.
+Place the script at the end of `<body>`, or load it with `defer` in `<head>`. BlurJS waits for the DOM if loaded before `<body>` is available. Include only one of the two builds.
 
 ## How to use BlurJS
 
@@ -98,7 +107,22 @@ You can include BlurJS in your project by downloading the ready-to-use files fro
 2.  Add the class `blur` to any HTML element you want BlurJS to affect.
 3.  Use the `blur-*` attributes on that element to customize its appearance and behavior.
 
-BlurJS will automatically detect and process all elements with the class `blur`.
+BlurJS detects `.blur` elements at startup and in newly inserted content. For decorative blurs, use `aria-hidden="true"` and `blur-pointer-events="false"` so the blur does not intercept clicks on other content.
+
+### Edit an effect at runtime
+
+Change the attributes on an existing element; BlurJS applies the new settings after the current batch of DOM changes. For example, given `<div id="glow" class="blur"></div>`:
+
+```js
+const glow = document.getElementById("glow");
+glow.setAttribute("blur-width", "180px");
+glow.setAttribute("blur-opacity", "0.5");
+glow.setAttribute("blur-opacity-duration", "2s");
+```
+
+- `glow.removeAttribute("blur-width")` removes that override, falling back to the element's inline width or the BlurJS default. Removing `blur-opacity` stops that animation without affecting others.
+- `glow.classList.remove("blur")` turns off the effect, restores its underlying inline styles, and releases its interaction handlers. Add the class back to enable the effect again.
+- Elements with the same animation target share a generated keyframe. BlurJS removes the rule when the last element using it changes its target, disables the animation, or leaves the document.
 
 ## Available properties
 
@@ -114,15 +138,19 @@ There are several available properties that come with BlurJS. Include these as H
 - `blur-right`: Positions the blur from the right edge of its parent. `no default`
 - `blur-bottom`: Positions the blur from the bottom edge of its parent. `no default`
 - `blur-border-radius`: Changes the border radius of the blur effect. `default: 5rem 2rem 5rem 50%`
-- `blur-grain`: Set to `true` to apply a grainy texture to the blur effect. `no default`
+- `blur-grain`: Set to `true` to add a translucent grain layer over a solid color or gradient. `no default`
 - `blur-pointer-events`: Set to `true` to enable pointer events (e.g., clicks) on the blur element, or `false` to disable. `no default (inherits CSS default)`
 - `blur-user-select`: Set to `true` to allow text selection on the blur element, or `false` to disable. `no default (inherits CSS default)`
 - `blur-mix-blend-mode`: Sets the CSS blend mode (e.g., `screen`, `color-dodge`, `multiply`). `no default`
-- `blur-custom`: Apply any custom CSS properties to the blur element. This is useful for adding properties that are not available through the other attributes. `no default`
+- `blur-custom`: Apply a CSS declaration list, just like a `style` attribute. CSS custom properties, `!important`, and URLs are supported. `no default`
+
+Existing inline declarations are preserved. For normal declarations, `blur-*` styles override their inline equivalents and `blur-custom` can override those styling attributes. Dedicated grain, pointer, selection, and animation controls are applied after `blur-custom`.
 
 **Animation Properties:**
 
-Animations run with a 50% keyframe by default (animating to the target value and back to the original).
+Animations run to their target at the 50% keyframe, then return to the starting value. Invalid targets are skipped; invalid literal values for duration, timing, delay, or repetition count fall back to their defaults. Built-in animations are disabled while the browser's `prefers-reduced-motion` preference is `reduce`.
+
+In browsers that support CSS `translate` and `animation-composition: add`, X and Y translations run together and compose with scale and rotation. Older browsers fall back to `transform`-based translation; configure only one axis per element there.
 
 - `blur-scale`: The scale factor (e.g., `1.2` for 120% size). Triggers a scale animation. `no default`
 - `blur-scale-duration`: Duration for the scale animation (e.g., `2s`, `500ms`). `default: 1s`
@@ -165,15 +193,15 @@ Animations run with a 50% keyframe by default (animating to the target value and
 - `blur-interaction`: Defines how animations are triggered.
     - `hover`: Animation plays when the mouse hovers over the element, pauses when it leaves.
     - `click`: Animation toggles between play/pause on each click.
-    - `scroll`: Animation plays when the element is scrolled into the viewport, pauses when scrolled out.
-    `no default`
+    - `scroll`: Animation plays while the element intersects the viewport and pauses when it leaves. Without `IntersectionObserver`, it plays normally.
+    - Omit the attribute for autoplay. Interactions pause and resume; they don't restart a finished finite animation.
 
 > [!NOTE]
 > For an exhaustive list of properties and more detailed explanations, view the [official documentation](https://infinitode-docs.gitbook.io/documentation/package-documentation/blurjs-package-documentation).
 
 ## Usage examples
 
-Below are some examples to get you started. Remember to include the BlurJS script at the end of your `<body>` and ensure parent elements of `.blur` items have `position: relative;` (or similar).
+Below are some examples to get you started. Include the BlurJS script once and give parent elements of `.blur` items `position: relative;` (or similar).
 
 ### Basic Styling
 
@@ -285,14 +313,13 @@ Below are some examples to get you started. Remember to include the BlurJS scrip
        blur-scale="2"
        blur-scale-duration="0.5s"
        blur-scale-timing="ease-out"
-       blur-scale-repetitions="1"
        blur-background="rgba(255, 200, 0, 0.8)"
        blur-width="80px"
        blur-height="80px">
   </div>
 </div>
 ```
-> **Note:** For hover, `blur-scale-repetitions` is often set to `1` if you want the animation to play once per hover, or `infinite` (with `alternate`) if you want it to pulse as long as hovered. The default behavior is it plays to 50% and back.
+> **Note:** The default repetition count is `infinite`, so this example keeps pulsing while hovered. A finite count is shared across hover sessions, not restarted on each hover.
 
 **2. Click Interaction (Toggle Opacity)**
 ```html
@@ -302,7 +329,6 @@ Below are some examples to get you started. Remember to include the BlurJS scrip
        blur-interaction="click"
        blur-opacity="0.1"
        blur-opacity-duration="1s"
-       blur-opacity-repetitions="1"
        blur-background="rgba(0, 100, 200, 0.7)"
        blur-width="100px"
        blur-height="100px">
@@ -353,10 +379,13 @@ BlurJS is licensed under a [modified MIT license](https://github.com/infinitode/
 # Showcases & Tests
 
 You can find various usage examples and performance tests in the `tests/` directory:
-- `tests/basic_test.html`: General feature verification.
+- `tests/basic_test.html`: General feature verification, including a live editing demo.
 - `tests/showcase_hero.html`: Hero section with animated lighting effects.
 - `tests/showcase_nav.html`: Glassmorphism navigation and scroll interactions.
-- `tests/stress_test.html`: Performance benchmark with 500+ elements.
+- `tests/stress_test.html`: Initialization benchmark with 500 elements.
+- `tests/regression_test.html`: Runs the regression suite against both browser files and reports the results in the page.
+
+Open these pages in a browser. No test runner or packages are needed. If your browser blocks scripts opened from local files, serve the repository with any static file server and open `/tests/regression_test.html`.
 
 # Contributions
 

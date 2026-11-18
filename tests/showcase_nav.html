@@ -25,12 +25,6 @@
             z-index: 1000;
         }
         .nav-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .logo { font-weight: bold; font-size: 1.5rem; }
@@ -59,9 +53,6 @@
             text-align: center;
             padding: 20px;
         }
-        .card-blur {
-            z-index: 0;
-        }
         .card-content {
             z-index: 1;
         }
@@ -69,28 +60,30 @@
 </head>
 <body>
     <nav>
-        <div class="blur nav-bg"
-             blur-width="100%" blur-height="100%"
+        <div class="blur nav-bg" aria-hidden="true"
+             blur-width="100%" blur-height="100%" blur-top="0" blur-left="0"
+             blur-z-index="-1" blur-border-radius="0" blur-pointer-events="false"
              blur-background="rgba(255, 255, 255, 0.5)"
-             blur-amount="10px"
+             blur-amount="0px"
              blur-custom="backdrop-filter: blur(10px);">
         </div>
         <div class="logo">BlurJS</div>
         <div class="links">
-            <a href="#">Home</a>
-            <a href="#">Features</a>
-            <a href="#">Showcase</a>
+            <a href="#home">Home</a>
+            <a href="#scroll">Scroll</a>
+            <a href="#hover">Hover</a>
         </div>
     </nav>
 
-    <section>
+    <section id="home">
         <h1>Scroll Down</h1>
         <p>Notice the glassmorphism navbar above.</p>
     </section>
 
-    <section>
+    <section id="scroll">
         <div class="card">
-            <div class="blur card-blur"
+            <div class="blur" aria-hidden="true"
+                 blur-z-index="0" blur-pointer-events="false"
                  blur-interaction="scroll"
                  blur-width="150%" blur-height="150%"
                  blur-background="linear-gradient(135deg, #60a5fa, #a855f7)"
@@ -105,10 +98,10 @@
         </div>
     </section>
 
-    <section>
-        <div class="card" style="cursor: pointer;">
-            <div class="blur card-blur"
-                 blur-interaction="hover"
+    <section id="hover">
+        <div class="card">
+            <div class="blur" aria-hidden="true"
+                 blur-z-index="0" blur-interaction="hover"
                  blur-width="100%" blur-height="100%"
                  blur-background="rgba(236, 72, 153, 0.4)"
                  blur-amount="20px"
@@ -117,7 +110,7 @@
             </div>
             <div class="card-content">
                 <h2>Hover Interaction</h2>
-                <p>Hover over this card to see the effect.</p>
+                <p>Hover over the pink background to see the effect.</p>
             </div>
         </div>
     </section>
