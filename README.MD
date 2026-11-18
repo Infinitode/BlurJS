@@ -1,4 +1,4 @@
-# BlurJS 1.7
+# BlurJS 1.8
 
 [![GitHub license](https://img.shields.io/badge/license-compliance-green.svg)](https://github.com/infinitode/blurjs/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/infinitode/blurjs.svg)](https://github.com/infinitode/blurjs/stargazers)
@@ -12,15 +12,15 @@ BlurJS is a lightweight JavaScript library for creating blurred effects on HTML 
 > [!NOTE]
 > Older versions of BlurJS are not maintained and are not recommended for use. We only maintain `main`, which is the latest stable release of BlurJS.
 
-## Unreleased maintenance update
+## Changes in Version 1.8
 
-- Preserves author inline styles, parses `blur-custom` as native CSS, and layers translucent grain over solid colors and gradients.
-- Combines X and Y translations in browsers with additive CSS animations. Distinct animation targets no longer share a keyframe accidentally, and malformed options fall back without disabling other animations.
-- Shares a viewport observer across scroll-triggered elements and releases detached targets. Loading the script twice no longer initializes elements twice.
-- Respects `prefers-reduced-motion` for built-in animations while keeping static blur styles.
-- Updates effects when their `blur-*` attributes or `.blur` class change, without needing to recreate the element.
-- Removes generated keyframes when their last BlurJS animation stops using them.
-- Adds a standalone browser regression suite for both distributions.
+- **Live editing**: Change `blur-*` attributes or toggle the `.blur` class without recreating the element. Removing the effect restores the underlying inline styles and cleans up interaction handlers.
+- **Keyframe cleanup**: Elements with matching animation targets share a keyframe rule. BlurJS removes the rule when the last effect using it changes target, stops using the animation, or leaves the document.
+- **Animation fixes**: X and Y translations can run together in browsers with additive CSS animation support. Distinct targets no longer accidentally share keyframes, and malformed options fall back without disabling other animations.
+- **Styling fixes**: BlurJS preserves existing inline styles, parses `blur-custom` as native CSS, and layers translucent grain over solid colors and gradients.
+- **Interaction fixes**: Scroll-triggered effects share a viewport observer that releases detached elements. Loading the script twice no longer initializes effects twice.
+- **Reduced motion**: Built-in animations respect `prefers-reduced-motion` while leaving the static blur in place.
+- **Browser tests**: A standalone regression suite covers both browser builds without dependencies, and the basic demo includes live editing controls.
 
 ## Changes in Version 1.7
 
